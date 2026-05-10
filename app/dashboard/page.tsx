@@ -81,9 +81,14 @@ export default function DashboardPage() {
     { status: STATUS_LABELS['CANCELLED'], count: cancelled, fill: STATUS_COLORS['CANCELLED'] },
   ];
 
-  const priorityData = ['HIGH', 'MEDIUM', 'LOW'].map((p) => ({
-    priority: p === 'HIGH' ? 'Alta' : p === 'MEDIUM' ? 'Media' : 'Baja',
-    count: tasks.filter((t) => t.priority === p).length,
+  const priorityData = [
+    { priority: 'Crítica', key: 'CRITICAL', fill: '#dc2626' },
+    { priority: 'Alta',    key: 'HIGH',     fill: '#f97316' },
+    { priority: 'Media',   key: 'MEDIUM',   fill: '#eab308' },
+    { priority: 'Baja',    key: 'LOW',      fill: '#9ca3af' },
+  ].map((p) => ({
+    ...p,
+    count: tasks.filter((t) => t.priority === p.key).length,
   }));
 
   return (
@@ -197,7 +202,11 @@ export default function DashboardPage() {
                         }}
                         cursor={{ fill: '#f9fafb' }}
                       />
-                      <Bar dataKey="count" name="Tareas" fill="#1f2937" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="count" name="Tareas" radius={[4, 4, 0, 0]}>
+                        {priorityData.map((entry, index) => (
+                          <Cell key={index} fill={entry.fill} />
+                        ))}
+                      </Bar>
                     </BarChart>
                   </ResponsiveContainer>
                 )}

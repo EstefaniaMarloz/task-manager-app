@@ -7,7 +7,7 @@ import {
   User,
 } from '@/types';
 
-const BASE_URL = 'https://task-api-production-bd4c.up.railway.app';
+const BASE_URL = '';
 
 async function request<T>(
   path: string,

@@ -1,27 +1,31 @@
 import { TaskStatus, TaskPriority } from '@/types';
 
 const statusStyles: Record<TaskStatus, string> = {
-  TODO: 'bg-gray-100 text-gray-600',
+  PENDING: 'bg-gray-100 text-gray-600',
   IN_PROGRESS: 'bg-blue-50 text-blue-700',
-  DONE: 'bg-green-50 text-green-700',
+  COMPLETED: 'bg-green-50 text-green-700',
+  CANCELLED: 'bg-red-50 text-red-500',
 };
 
 const statusLabels: Record<TaskStatus, string> = {
-  TODO: 'Pendiente',
+  PENDING: 'Pendiente',
   IN_PROGRESS: 'En progreso',
-  DONE: 'Completada',
+  COMPLETED: 'Completada',
+  CANCELLED: 'Cancelada',
 };
 
 const priorityStyles: Record<TaskPriority, string> = {
   LOW: 'bg-gray-50 text-gray-500',
   MEDIUM: 'bg-yellow-50 text-yellow-700',
-  HIGH: 'bg-red-50 text-red-600',
+  HIGH: 'bg-orange-50 text-orange-600',
+  CRITICAL: 'bg-red-50 text-red-600',
 };
 
 const priorityLabels: Record<TaskPriority, string> = {
   LOW: 'Baja',
   MEDIUM: 'Media',
   HIGH: 'Alta',
+  CRITICAL: 'Crítica',
 };
 
 export function StatusBadge({ status }: { status: TaskStatus }) {

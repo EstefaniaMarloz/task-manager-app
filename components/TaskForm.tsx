@@ -10,22 +10,24 @@ interface TaskFormProps {
 }
 
 const statusOptions: { value: TaskStatus; label: string }[] = [
-  { value: 'TODO', label: 'Pendiente' },
+  { value: 'PENDING', label: 'Pendiente' },
   { value: 'IN_PROGRESS', label: 'En progreso' },
-  { value: 'DONE', label: 'Completada' },
+  { value: 'COMPLETED', label: 'Completada' },
+  { value: 'CANCELLED', label: 'Cancelada' },
 ];
 
 const priorityOptions: { value: TaskPriority; label: string }[] = [
   { value: 'LOW', label: 'Baja' },
   { value: 'MEDIUM', label: 'Media' },
   { value: 'HIGH', label: 'Alta' },
+  { value: 'CRITICAL', label: 'Crítica' },
 ];
 
 export default function TaskForm({ initial, onSubmit, onCancel }: TaskFormProps) {
   const [form, setForm] = useState<TaskRequest>({
     title: initial?.title ?? '',
     description: initial?.description ?? '',
-    status: initial?.status ?? 'TODO',
+    status: initial?.status ?? 'PENDING',
     priority: initial?.priority ?? 'MEDIUM',
     dueDate: initial?.dueDate ?? '',
   });

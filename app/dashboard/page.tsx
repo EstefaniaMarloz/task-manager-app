@@ -32,15 +32,17 @@ function StatCard({ label, value, accent = 'bg-gray-50' }: StatCardProps) {
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  TODO: 'Pendiente',
+  PENDING: 'Pendiente',
   IN_PROGRESS: 'En progreso',
-  DONE: 'Completada',
+  COMPLETED: 'Completada',
+  CANCELLED: 'Cancelada',
 };
 
 const STATUS_COLORS: Record<string, string> = {
-  TODO: '#e5e7eb',
+  PENDING: '#e5e7eb',
   IN_PROGRESS: '#93c5fd',
-  DONE: '#86efac',
+  COMPLETED: '#86efac',
+  CANCELLED: '#fca5a5',
 };
 
 export default function DashboardPage() {
@@ -67,14 +69,16 @@ export default function DashboardPage() {
   }, [fetchTasks]);
 
   const total = tasks.length;
-  const done = tasks.filter((t) => t.status === 'DONE').length;
+  const done = tasks.filter((t) => t.status === 'COMPLETED').length;
   const inProgress = tasks.filter((t) => t.status === 'IN_PROGRESS').length;
-  const todo = tasks.filter((t) => t.status === 'TODO').length;
+  const todo = tasks.filter((t) => t.status === 'PENDING').length;
+  const cancelled = tasks.filter((t) => t.status === 'CANCELLED').length;
 
   const chartData = [
-    { status: STATUS_LABELS['TODO'], count: todo, fill: STATUS_COLORS['TODO'] },
+    { status: STATUS_LABELS['PENDING'], count: todo, fill: STATUS_COLORS['PENDING'] },
     { status: STATUS_LABELS['IN_PROGRESS'], count: inProgress, fill: STATUS_COLORS['IN_PROGRESS'] },
-    { status: STATUS_LABELS['DONE'], count: done, fill: STATUS_COLORS['DONE'] },
+    { status: STATUS_LABELS['COMPLETED'], count: done, fill: STATUS_COLORS['COMPLETED'] },
+    { status: STATUS_LABELS['CANCELLED'], count: cancelled, fill: STATUS_COLORS['CANCELLED'] },
   ];
 
   const priorityData = ['HIGH', 'MEDIUM', 'LOW'].map((p) => ({
@@ -112,6 +116,11 @@ export default function DashboardPage() {
               <StatCard label="En progreso" value={inProgress} accent="bg-blue-50" />
               <StatCard label="Completadas" value={done} accent="bg-green-50" />
             </div>
+            {cancelled > 0 && (
+              <div className="grid grid-cols-1 gap-4 mb-8">
+                <StatCard label="Canceladas" value={cancelled} accent="bg-red-50" />
+              </div>
+            )}
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white rounded-xl border border-gray-100 p-6">

@@ -1,6 +1,7 @@
 'use client';
 
 import Sidebar from './Sidebar';
+import Footer from './Footer';
 import AuthGuard from './AuthGuard';
 import { Role } from '@/types';
 
@@ -14,9 +15,12 @@ export default function AppLayout({ children, requiredRole }: AppLayoutProps) {
     <AuthGuard requiredRole={requiredRole}>
       <div className="flex min-h-screen">
         <Sidebar />
-        <main className="flex-1 overflow-auto">
-          {children}
-        </main>
+        <div className="flex-1 flex flex-col overflow-auto">
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </div>
     </AuthGuard>
   );

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { authApi } from '@/lib/api';
+import Footer from '@/components/Footer';
 
 export default function RegisterPage() {
   const [form, setForm] = useState({ username: '', email: '', password: '' });
@@ -33,7 +34,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <div className="flex-1 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
           <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">TaskManager</h1>
@@ -117,6 +119,8 @@ export default function RegisterPage() {
           </Link>
         </p>
       </div>
+      </div>
+      <Footer />
     </div>
   );
 }

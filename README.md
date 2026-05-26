@@ -8,6 +8,8 @@
 
 Aplicación web para gestión de tareas con autenticación JWT, panel de administración y estadísticas visuales. Diseño minimalista inspirado en Notion y Linear.
 
+**Demo en producción:** https://task-manager-app-black-nine.vercel.app
+
 ---
 
 ## Capturas de pantalla
